@@ -1,6 +1,6 @@
 // src/pages/Home.tsx
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 interface Product {
   id: string;
@@ -15,16 +15,16 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/data/products.json')
-      .then(res => {
-        if (!res.ok) throw new Error('Network response was not ok');
+    fetch(`${process.env.PUBLIC_URL}/data/products.json`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
       })
       .then((data: Product[]) => {
         setProducts(data);
       })
-      .catch(err => {
-        console.error('Error cargando productos:', err);
+      .catch((err) => {
+        console.error("Error cargando productos:", err);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -38,7 +38,9 @@ export default function Home() {
       {/* Hero */}
       <section
         className="relative h-screen bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/hero.jpg')" }}
+        style={{
+          backgroundImage: `url(${process.env.PUBLIC_URL}/images/hero.jpg)`,
+        }}
       >
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
@@ -59,15 +61,21 @@ export default function Home() {
 
       {/* Productos Destacados */}
       <section className="py-16 px-4 bg-gray-100">
-        <h2 className="text-3xl font-bold text-center mb-8">Productos Destacados</h2>
+        <h2 className="text-3xl font-bold text-center mb-8">
+          Productos Destacados
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {products.map((p) => (
-            <div key={p.id} className="bg-white rounded-lg shadow hover:shadow-lg transition p-4">
+            <div
+              key={p.id}
+              className="bg-white rounded-lg shadow hover:shadow-lg transition p-4"
+            >
               <img
-                src={p.imagen}
+                src={`${process.env.PUBLIC_URL}${p.imagen}`}
                 alt={p.nombre}
                 className="w-full h-48 object-cover rounded"
               />
+
               <h3 className="mt-4 text-xl font-semibold">{p.nombre}</h3>
               <p className="mt-2 text-gray-700">${p.precio.toFixed(2)}</p>
               <button className="mt-4 w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition">
@@ -82,7 +90,10 @@ export default function Home() {
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto">
           <video className="w-full rounded-lg" autoPlay loop muted>
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+            <source
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
+              type="video/mp4"
+            />
             Tu navegador no soporta vídeos.
           </video>
         </div>
@@ -90,11 +101,15 @@ export default function Home() {
 
       {/* Testimonios */}
       <section className="py-16 px-4 bg-gray-100">
-        <h2 className="text-3xl font-bold text-center mb-8">Lo que dicen nuestros clientes</h2>
+        <h2 className="text-3xl font-bold text-center mb-8">
+          Lo que dicen nuestros clientes
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {['Ana', 'Luis', 'María'].map((name) => (
+          {["Ana", "Luis", "María"].map((name) => (
             <blockquote key={name} className="bg-white p-6 rounded-lg shadow">
-              <p className="italic">“Excelente calidad y envío rápido. ¡Recomendado!”</p>
+              <p className="italic">
+                “Excelente calidad y envío rápido. ¡Recomendado!”
+              </p>
               <footer className="mt-4 font-semibold">— {name}</footer>
             </blockquote>
           ))}
@@ -112,10 +127,14 @@ export default function Home() {
             <h4 className="text-white font-bold mb-2">Enlaces</h4>
             <ul>
               <li>
-                <Link to="/" className="hover:text-white">Inicio</Link>
+                <Link to="/" className="hover:text-white">
+                  Inicio
+                </Link>
               </li>
               <li>
-                <Link to="/productos" className="hover:text-white">Productos</Link>
+                <Link to="/productos" className="hover:text-white">
+                  Productos
+                </Link>
               </li>
             </ul>
           </div>
