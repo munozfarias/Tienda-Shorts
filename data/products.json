@@ -1,0 +1,24 @@
+[
+    {
+      "id": "1",
+      "nombre": "Short Muay Thai Classic",
+      "precio": 35,
+      "imagen": "/images/short.jpg",
+      "tallas": ["S","M","L","XL"]
+    },
+    {
+      "id": "2",
+      "nombre": "Short Muay Thai Pro",
+      "precio": 50,
+      "imagen": "/images/short.jpg",
+      "tallas": ["M","L","XL"]
+    },
+    {
+      "id": "3",
+      "nombre": "Short Muay Thai Lite",
+      "precio": 30,
+      "imagen": "/images/short.jpg",
+      "tallas": ["S","M","L"]
+    }
+  ]
+  
