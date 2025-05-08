@@ -21,25 +21,25 @@ const Navbar: React.FC = () => {
             <Link to="/">TiendaShorts</Link>
           </div>
 
-          {/* Botón hamburguesa (solo visible en móviles) */}
+          {/* Botón hamburguesa */}
           <div className="md:hidden">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="text-gray-600 hover:text-gray-800 focus:outline-none"
+              className="text-gray-600 hover:text-gray-800"
               aria-label="Menú"
             >
               {menuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
             </button>
           </div>
 
-          {/* Menú de navegación para escritorio */}
+          {/* Menú principal en desktop */}
           <div className="hidden md:flex flex-1 justify-center space-x-8">
-            <Link to="/" className="nav-link text-gray-700 hover:text-black">Inicio</Link>
-            <Link to="/productos" className="nav-link text-gray-700 hover:text-black">Productos</Link>
-            <Link to="/contacto" className="nav-link text-gray-700 hover:text-black">Contacto</Link>
+            <Link to="/" className="text-gray-700 hover:text-black">Inicio</Link>
+            <Link to="/productos" className="text-gray-700 hover:text-black">Productos</Link>
+            <Link to="/contacto" className="text-gray-700 hover:text-black">Contacto</Link>
           </div>
 
-          {/* Íconos */}
+          {/* Íconos en desktop */}
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={() => setShowSearch(prev => !prev)}
@@ -63,26 +63,29 @@ const Navbar: React.FC = () => {
             <Link to="/perfil" className="text-gray-600 hover:text-gray-800">
               <FaUser size={20} />
             </Link>
-
             <Link to="/carrito" className="text-gray-600 hover:text-gray-800">
               <FaShoppingCart size={20} />
             </Link>
           </div>
         </div>
 
-        {/* Menú colapsable móvil */}
+        {/* Menú móvil colapsado */}
         {menuOpen && (
           <div className="md:hidden flex flex-col items-start space-y-4 mt-4 pb-4 border-t border-gray-200">
             <Link to="/" className="text-gray-700 hover:text-black w-full" onClick={() => setMenuOpen(false)}>Inicio</Link>
             <Link to="/productos" className="text-gray-700 hover:text-black w-full" onClick={() => setMenuOpen(false)}>Productos</Link>
             <Link to="/contacto" className="text-gray-700 hover:text-black w-full" onClick={() => setMenuOpen(false)}>Contacto</Link>
-            <div className="flex space-x-4 mt-2">
+
+            {/* Íconos y búsqueda en móvil */}
+            <div className="flex items-center space-x-4 mt-2">
               <button
                 onClick={() => setShowSearch(prev => !prev)}
                 className="text-gray-600 hover:text-gray-800"
+                aria-label="Buscar"
               >
                 <FaSearch size={18} />
               </button>
+
               <Link to="/perfil" className="text-gray-600 hover:text-gray-800">
                 <FaUser size={20} />
               </Link>
@@ -90,6 +93,17 @@ const Navbar: React.FC = () => {
                 <FaShoppingCart size={20} />
               </Link>
             </div>
+
+            {showSearch && (
+              <input
+                type="text"
+                placeholder="Buscar..."
+                className="w-full mt-2 px-3 py-1 border border-gray-300 rounded"
+                autoFocus
+                onBlur={handleSearchBlur}
+                onKeyDown={(e) => e.key === 'Enter' && setShowSearch(false)}
+              />
+            )}
           </div>
         )}
       </div>
