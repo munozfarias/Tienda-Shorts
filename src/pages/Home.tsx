@@ -81,18 +81,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Video */}
-      <section className="py-16 bg-white px-4">
-        <div className="max-w-4xl mx-auto">
-          <video className="w-full rounded-lg" autoPlay loop muted>
-            <source
-              src="https://www.w3schools.com/html/mov_bbb.mp4"
-              type="video/mp4"
-            />
-            Tu navegador no soporta vídeos.
-          </video>
-        </div>
-      </section>
+      {/* Vídeo de Muay Thai desde YouTube */}
+<section className="py-16 bg-white">
+  <div className="max-w-4xl mx-auto">
+    <div className="aspect-w-16 aspect-h-9">
+      <iframe
+        className="w-full h-full rounded-lg"
+        src="https://www.youtube.com/embed/6Dd_pbjWXGs"
+        title="Muay Thai"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+    </div>
+  </div>
+</section>
 
       {/* Testimonios */}
       <section className="py-16 px-4 bg-gray-100">
