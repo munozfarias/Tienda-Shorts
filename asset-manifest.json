@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/munozfarias/Tienda-Shorts/static/css/main.d273cb2f.css",
-    "main.js": "/munozfarias/Tienda-Shorts/static/js/main.bdc89b0a.js",
-    "index.html": "/munozfarias/Tienda-Shorts/index.html",
-    "main.d273cb2f.css.map": "/munozfarias/Tienda-Shorts/static/css/main.d273cb2f.css.map",
-    "main.bdc89b0a.js.map": "/munozfarias/Tienda-Shorts/static/js/main.bdc89b0a.js.map"
+    "main.css": "/Tienda-Shorts/static/css/main.d273cb2f.css",
+    "main.js": "/Tienda-Shorts/static/js/main.c06f78e0.js",
+    "index.html": "/Tienda-Shorts/index.html",
+    "main.d273cb2f.css.map": "/Tienda-Shorts/static/css/main.d273cb2f.css.map",
+    "main.c06f78e0.js.map": "/Tienda-Shorts/static/js/main.c06f78e0.js.map"
   },
   "entrypoints": [
     "static/css/main.d273cb2f.css",
-    "static/js/main.bdc89b0a.js"
+    "static/js/main.c06f78e0.js"
   ]
 }
