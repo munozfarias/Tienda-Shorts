@@ -20,12 +20,8 @@ export default function Home() {
         if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
       })
-      .then((data: Product[]) => {
-        setProducts(data);
-      })
-      .catch((err) => {
-        console.error("Error cargando productos:", err);
-      })
+      .then((data: Product[]) => setProducts(data))
+      .catch((err) => console.error("Error cargando productos:", err))
       .finally(() => setLoading(false));
   }, []);
 
@@ -44,10 +40,10 @@ export default function Home() {
       >
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
             Lleva tu entrenamiento al siguiente nivel
           </h1>
-          <p className="text-lg md:text-xl text-gray-200 mb-8">
+          <p className="text-md sm:text-lg md:text-xl text-gray-200 mb-8 max-w-xl">
             Descubre nuestra nueva colección de shorts de Muay Thai
           </p>
           <Link
@@ -61,24 +57,23 @@ export default function Home() {
 
       {/* Productos Destacados */}
       <section className="py-16 px-4 bg-gray-100">
-        <h2 className="text-3xl font-bold text-center mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">
           Productos Destacados
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {products.map((p) => (
             <div
               key={p.id}
-              className="bg-white rounded-lg shadow hover:shadow-lg transition p-4"
+              className="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col"
             >
               <img
                 src={`${process.env.PUBLIC_URL}${p.imagen}`}
                 alt={p.nombre}
                 className="w-full h-48 object-cover rounded"
               />
-
-              <h3 className="mt-4 text-xl font-semibold">{p.nombre}</h3>
+              <h3 className="mt-4 text-lg sm:text-xl font-semibold">{p.nombre}</h3>
               <p className="mt-2 text-gray-700">${p.precio.toFixed(2)}</p>
-              <button className="mt-4 w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition">
+              <button className="mt-auto bg-black text-white py-2 rounded hover:bg-gray-800 transition">
                 Agregar al carrito
               </button>
             </div>
@@ -86,8 +81,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Vídeo */}
-      <section className="py-16 bg-white">
+      {/* Video */}
+      <section className="py-16 bg-white px-4">
         <div className="max-w-4xl mx-auto">
           <video className="w-full rounded-lg" autoPlay loop muted>
             <source
@@ -101,10 +96,10 @@ export default function Home() {
 
       {/* Testimonios */}
       <section className="py-16 px-4 bg-gray-100">
-        <h2 className="text-3xl font-bold text-center mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8">
           Lo que dicen nuestros clientes
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {["Ana", "Luis", "María"].map((name) => (
             <blockquote key={name} className="bg-white p-6 rounded-lg shadow">
               <p className="italic">
@@ -117,8 +112,8 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-gray-300 py-8">
-        <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <footer className="bg-black text-gray-300 py-8 px-4">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           <div>
             <h4 className="text-white font-bold mb-2">TiendaShorts</h4>
             <p>Shorts de Muay Thai de alta calidad.</p>
@@ -140,8 +135,8 @@ export default function Home() {
           </div>
           <div>
             <h4 className="text-white font-bold mb-2">Síguenos</h4>
-            <div className="flex space-x-4">
-              {/* Aquí tus íconos sociales */}
+            <div className="flex justify-center md:justify-start space-x-4">
+              {/* Iconos de redes sociales aquí */}
             </div>
           </div>
         </div>
