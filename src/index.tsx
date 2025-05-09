@@ -1,10 +1,10 @@
 // src/index.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { HashRouter as Router } from 'react-router-dom';
-import App from './App'; // Asegúrate de que App esté exportado correctamente
-import './index.css'; // Esto importa tus estilos de Tailwind
-import { CarritoProvider } from './context/CarritoContext'; // Importa el CarritoProvider
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import { CarritoProvider } from './context/CarritoContext';  // Correcto, ya que has definido CarritoProvider
+import './index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,11 +12,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Router>
-      {/* Envolver App con CarritoProvider */}
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <CarritoProvider>
         <App />
       </CarritoProvider>
-    </Router>
+    </BrowserRouter>
   </React.StrictMode>
 );

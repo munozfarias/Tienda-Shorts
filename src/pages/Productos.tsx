@@ -1,40 +1,76 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// src/pages/Productos.tsx
+import React, { useEffect, useState, useMemo } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-interface Product {
+interface Producto {
   id: string;
   nombre: string;
   precio: number;
   imagen: string;
+  descripcion?: string;
+  tallas?: string[];
+}
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
 }
 
 export default function Productos() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [productos, setProductos] = useState<Producto[]>([]);
+  const [loading, setLoading] = useState(true);
+  const query = useQuery();
+  const search = query.get("search")?.toLowerCase() || "";
 
   useEffect(() => {
-    fetch('/data/products.json')
+    fetch(`${process.env.PUBLIC_URL}/data/products.json`)
       .then(res => res.json())
-      .then(setProducts)
-      .catch(console.error);
+      .then((data: Producto[]) => setProductos(data))
+      .catch(console.error)
+      .finally(() => setLoading(false));
   }, []);
+
+  const filtrados = useMemo(() => {
+    if (!search) return productos;
+    return productos.filter(p =>
+      p.nombre.toLowerCase().includes(search) ||
+      (p.descripcion?.toLowerCase().includes(search) ?? false)
+    );
+  }, [productos, search]);
+
+  if (loading) {
+    return <p className="text-center mt-8">Cargando catálogo…</p>;
+  }
 
   return (
     <main className="p-6">
-      <h1 className="text-4xl font-bold mb-6">Catálogo Completo</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {products.map(p => (
+      {search && (
+        <p className="mb-4 text-gray-600">
+          Resultados para: <strong>{search}</strong>
+        </p>
+      )}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {filtrados.map(p => (
           <Link
             key={p.id}
-            to={`/producto/${p.id}`}
+            to={`/productos/${p.id}`}
             className="block bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden"
           >
-            <img src={p.imagen} alt={p.nombre} className="w-full h-48 object-cover" />
+            <img
+              src={`${process.env.PUBLIC_URL}${p.imagen}`}
+              alt={p.nombre}
+              className="w-full h-48 object-cover"
+            />
             <div className="p-4">
               <h2 className="text-xl font-semibold">{p.nombre}</h2>
-              <p className="text-gray-700 mt-2">${p.precio.toFixed(2)}</p>
+              <p className="text-gray-700 mt-2">${p.precio.toLocaleString()}</p>
             </div>
           </Link>
         ))}
+        {filtrados.length === 0 && (
+          <p className="col-span-full text-center text-gray-500">
+            No encontramos productos para “{search}”
+          </p>
+        )}
       </div>
     </main>
   );

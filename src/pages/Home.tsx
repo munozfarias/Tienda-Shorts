@@ -1,17 +1,10 @@
 // src/pages/Home.tsx
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-interface Product {
-  id: string;
-  nombre: string;
-  precio: number;
-  imagen: string;
-  tallas: string[];
-}
+import { Producto } from "../types/Product";
 
 export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Producto[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,7 +13,7 @@ export default function Home() {
         if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
       })
-      .then((data: Product[]) => setProducts(data))
+      .then((data: Producto[]) => setProducts(data))
       .catch((err) => console.error("Error cargando productos:", err))
       .finally(() => setLoading(false));
   }, []);
@@ -67,7 +60,7 @@ export default function Home() {
               className="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col"
             >
               <img
-                src={`${process.env.PUBLIC_URL}${p.imagen}`}
+                src={`${process.env.PUBLIC_URL}${p.imagen}`}  // Asegúrate de que 'imagen' exista
                 alt={p.nombre}
                 className="w-full h-48 object-cover rounded"
               />
@@ -82,20 +75,20 @@ export default function Home() {
       </section>
 
       {/* Vídeo de Muay Thai desde YouTube */}
-<section className="py-16 bg-white">
-  <div className="max-w-4xl mx-auto">
-    <div className="aspect-w-16 aspect-h-9">
-      <iframe
-        className="w-full h-full rounded-lg"
-        src="https://www.youtube.com/embed/6Dd_pbjWXGs"
-        title="Muay Thai"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      ></iframe>
-    </div>
-  </div>
-</section>
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="aspect-w-16 aspect-h-9">
+            <iframe
+              className="w-full h-full rounded-lg"
+              src="https://www.youtube.com/embed/6Dd_pbjWXGs"
+              title="Muay Thai"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
 
       {/* Testimonios */}
       <section className="py-16 px-4 bg-gray-100">

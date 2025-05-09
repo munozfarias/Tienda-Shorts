@@ -1,11 +1,13 @@
-import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Productos from './pages/Productos';
-import ProductDetail from './pages/ProductDetail';
-import Contacto from './pages/Contacto';
-import Perfil from './pages/Perfil';
-import Carrito from './pages/Carrito';
+// src/App.tsx
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Productos from "./pages/Productos";
+import Contacto from "./pages/Contacto";
+import Perfil from "./pages/Perfil";
+import Carrito from "./pages/Carrito";
+import Detalle from './pages/Detalle';
 
 function App() {
   return (
@@ -14,10 +16,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/productos" element={<Productos />} />
-        <Route path="/producto/:id" element={<ProductDetail />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/carrito" element={<Carrito />} />
+        <Route path="/productos/:id" element={<Detalle />} />
+
       </Routes>
     </>
   );

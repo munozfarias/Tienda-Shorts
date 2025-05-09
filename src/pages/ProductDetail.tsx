@@ -1,65 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useCarrito, Producto } from '../context/CarritoContext';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ProductInCart } from "../types/Product";
+import { useCarrito } from "../context/CarritoContext";
 
-interface ProductData {
+interface Producto {
   id: string;
   nombre: string;
-  precio: number;
   descripcion: string;
+  precio: number;
   imagen: string;
-  tallas: string[];
+  talla: string;
 }
 
-export default function ProductDetail() {
+const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const [product, setProduct] = useState<ProductData | null>(null);
-  const { agregarProducto } = useCarrito();
+  const [producto, setProducto] = useState<Producto | null>(null);
+  const [loading, setLoading] = useState(true);
+  const { agregarAlCarrito } = useCarrito();
 
   useEffect(() => {
-    fetch('/data/products.json')
+    fetch(`${process.env.PUBLIC_URL}/data/products.json`)
       .then(res => res.json())
-      .then((data: ProductData[]) => {
-        const found = data.find(p => p.id === id);
-        setProduct(found || null);
+      .then((data: Producto[]) => {
+        const encontrado = data.find(p => p.id === id);
+        setProducto(encontrado || null);
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setLoading(false));
   }, [id]);
 
-  if (!product) return <p className="p-6">Producto no encontrado.</p>;
+  if (loading) return <p className="text-center mt-8">Cargando producto…</p>;
+  if (!producto) return <p className="text-center mt-8">Producto no encontrado</p>;
 
   return (
-    <main className="p-6 max-w-4xl mx-auto">
-      <div className="flex flex-col md:flex-row gap-6">
-        <img src={product.imagen} alt={product.nombre} className="w-full md:w-1/2 rounded" />
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold">{product.nombre}</h1>
-          <p className="text-gray-700 mt-2">{product.descripcion}</p>
-          <p className="text-2xl font-semibold mt-4">${product.precio.toFixed(2)}</p>
-          <div className="mt-4">
-            <label className="block mb-1">Talla:</label>
-            <select className="border rounded p-2">
-              {product.tallas.map(t => <option key={t} value={t}>{t}</option>)}
-            </select>
-          </div>
-          <button
-            onClick={() =>
-              agregarProducto({
-                id: Number(product.id),
-                nombre: product.nombre,
-                precio: product.precio,
-                descripcion: product.descripcion,
-                imagen: product.imagen,
-                tallas: product.tallas,
-                cantidad: 1
-              } as Producto)
-            }
-            className="mt-6 bg-black text-white py-2 px-4 rounded hover:bg-gray-800 transition"
-          >
-            Añadir al carrito
-          </button>
-        </div>
-      </div>
-    </main>
+    <div className="max-w-3xl mx-auto p-6">
+      <img
+        src={`${process.env.PUBLIC_URL}${producto.imagen}`}
+        alt={producto.nombre}
+        className="w-full max-h-96 object-cover rounded"
+      />
+      <h1 className="text-3xl font-bold mt-4">{producto.nombre}</h1>
+      <p className="text-gray-700 mt-2">{producto.descripcion}</p>
+      <p className="text-xl font-semibold mt-2">${producto.precio}</p>
+      <p className="text-sm text-gray-500">Talla: {producto.talla}</p>
+      <button
+        onClick={() =>
+          agregarAlCarrito({
+            ...producto,
+            cantidad: 1,
+          })
+        }
+        className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+      >
+        Agregar al carrito
+      </button>
+    </div>
   );
-}
+};
+
+export default ProductDetail;

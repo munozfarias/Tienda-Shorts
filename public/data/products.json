@@ -1,24 +1,26 @@
 [
-    {
-      "id": "1",
-      "nombre": "Short Muay Thai Classic",
-      "precio": 35,
-      "imagen": "/images/short.jpg",
-      "tallas": ["S","M","L","XL"]
-    },
-    {
-      "id": "2",
-      "nombre": "Short Muay Thai Pro",
-      "precio": 50,
-      "imagen": "/images/short.jpg",
-      "tallas": ["M","L","XL"]
-    },
-    {
-      "id": "3",
-      "nombre": "Short Muay Thai Lite",
-      "precio": 30,
-      "imagen": "/images/short.jpg",
-      "tallas": ["S","M","L"]
-    }
-  ]
-  
+  {
+    "id": "short1",
+    "nombre": "Short Rojo Fuego",
+    "precio": 29900,
+    "imagen": "/images/short.jpg",
+    "descripcion": "Short profesional de Muay Thai, diseño rojo fuego.",
+    "tallas": ["S","M","L"]
+  },
+  {
+    "id": "short2",
+    "nombre": "Short Azul Trueno",
+    "precio": 27900,
+    "imagen": "/images/short.jpg",
+    "descripcion": "Short deportivo con detalles en azul y costuras reforzadas.",
+    "tallas": ["M","L","XL"]
+  },
+  {
+    "id": "short3",
+    "nombre": "Short Negro Elegante",
+    "precio": 31900,
+    "imagen": "/images/short.jpg",
+    "descripcion": "Short clásico negro con ribetes dorados y tejido ligero.",
+    "tallas": ["S","M","L","XL"]
+  }
+]
